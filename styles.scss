@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200;300;400;500;600;700&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&family=VT323&display=swap');
 
 *,
 *::before,
@@ -27,6 +27,83 @@ body {
 		justify-content: space-between;
 		position: relative;
 		background: #025e8c;
+		overflow: hidden;
+		#game-over-screen{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			transform-origin: 50% 50%;
+			background: rgba($color: #025e8c, $alpha: .9);
+			z-index: 11;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			gap: 20px;
+			display: none;
+			&.gameOver{
+				display: flex;
+			}
+			.final-score{
+				color: #fff;
+				font-size: 40px;
+				position: absolute;
+				top: 80px;
+				left: 50%;
+				transform: translate(-50%, 0);
+				font-family: "Pangolin", cursive;
+			}
+			.game-over-text{
+				text-transform: capitalize;
+				color: #fff;
+				font-size: 24px;
+				font-family: 'Pangolin', cursive;
+			}
+			.play-again{
+				padding: 8px 15px;
+				background: transparent;
+				border: 2px solid #fff;
+				border-radius: 50px;
+				font-size: 18px;
+				font-weight: 400;
+				color: #FFF;
+				text-transform: capitalize;
+				font-family: 'Pangolin', cursive;
+				transform: scaleX(1);
+				transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 5px;
+				cursor: pointer;
+				
+				.play-again-icon{
+					color: #fff;
+					font-weight: bold;
+					rotate: 270deg;
+					font-size: 1.5rem;
+				}
+				&:focus{
+				}
+				&:hover{
+					transform: scaleX(1.1);
+					.play-again-icon{
+						animation: rotate .5s forwards;
+					}
+					@keyframes rotate {
+						0%{
+							rotate: 270deg;
+						}100%{
+							rotate: 630deg;
+						}
+					}
+				}
+			}
+		}
 		#mission{
 			display: flex;
 			align-items: center;
@@ -88,6 +165,17 @@ body {
 						background: #ccc;
 					}
 				}
+				.progress-text{
+					color: #FFF;
+					font-size: 18px;
+					display: none;
+					transition: all .3s;
+					opacity: 0;
+					&.show{
+						display: block;
+						opacity: 1;
+					}
+				}
 			}
 			
 		}
@@ -95,12 +183,26 @@ body {
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);
 			grid-template-rows: repeat(7, 1fr);
+			position: relative;
 			img{
 				cursor: pointer;
 				width: 50px;
 				height: 50px;
 				position: relative;
 				z-index: 1;
+				.cross-icon{
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					pointer-events: none;
+					z-index: 2;
+					border: 5px solid red;
+					img{
+						position: relative;
+						z-index: 3;
+					}
+				}
 				
 			}
 		}
